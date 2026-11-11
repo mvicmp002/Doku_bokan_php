@@ -1,0 +1,58 @@
+#game-screen { background-image: url("../img/pastito_feliz.jpeg"); }
+
+.frente { background-image: url('../img/maso_frente.png'); }
+.espalda { background-image: url('../img/maso_espalda.png'); }
+.izquierda { background-image: url('../img/maso_izquierda.png'); }
+.derecha { background-image: url('../img/maso_derecha.png'); }
+
+.player {
+  width: 110px;
+  height: 110px;
+}
+.basura {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  cursor: grab;
+  z-index: 15;
+  transition: transform 0.15s;
+  filter: drop-shadow(0 6px 4px rgba(0, 0, 0, 0.4));
+}
+.basura:hover { transform: scale(1.12); }
+.basura img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.basura.arrastrando { opacity: 0.5; }
+
+#basura1 { top: 1000px; left: 700px; }
+#basura2 { top: 950px;  left: 1700px; }
+#basura3 { top: 450px;  left: 1250px; }
+
+/* Botes de basura (en fila, de izquierda a derecha: bote1, bote2, bote3) */
+.basurero {
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  border: 4px dashed rgba(255, 255, 255, 0.85);
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 14px;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+.basurero.sobre {
+  border-color: #ffd60a;
+  background: rgba(255, 214, 10, 0.3);
+  transform: scale(1.08);
+}
+
+/* Basura ya dentro de un bote */
+.basurero .basura { position: static; width: 70px; height: 70px; filter: none; }
+
+#bote1 { top: 700px; left: 1000px; }
+#bote2 { top: 700px; left: 1250px; }
+#bote3 { top: 700px; left: 1500px; }
+
+#monje { top: 1150px; left: 850px; }
+#puerta { top: 1150px; left: 2000px; }

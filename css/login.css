@@ -1,0 +1,278 @@
+/* ===== LOGIN Y REGISTRO - DOKU BOKAN ===== */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Trebuchet MS', sans-serif;
+  background: linear-gradient(135deg, #ffafcc, #ffc8dd, #bde0fe, #ffafcc);
+  background-size: 300% 300%;
+  animation: fondo 10s ease infinite, fadeIn 0.8s ease-out;
+}
+
+@keyframes fondo {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+body.fade-out { animation: fadeOut 0.6s forwards ease-in; }
+
+/* ----- Tarjeta ----- */
+.card {
+  display: flex;
+  width: min(920px, 100%);
+  min-height: 560px;
+  background: #fff;
+  border: 5px solid #fff;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 18px 50px rgba(43, 16, 85, 0.35);
+}
+.card.invertido { flex-direction: row-reverse; }
+
+/* ----- Panel de color con rayas ----- */
+.panel {
+  position: relative;
+  flex: 0 0 42%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  padding: 40px 28px;
+  text-align: center;
+  color: #fff;
+  background: repeating-linear-gradient(
+    -45deg,
+    #ef476f 0, #ef476f 26px,
+    #f7678a 26px, #f7678a 52px
+  );
+  border-radius: 0 150px 150px 0;
+  overflow: hidden;
+}
+.card.invertido .panel { border-radius: 150px 0 0 150px; }
+
+/* Detalles amarillos */
+.panel::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  left: -40px;
+  width: 130px;
+  height: 130px;
+  background: #ffd60a;
+  border-radius: 50%;
+  opacity: 0.95;
+}
+.panel::after {
+  content: "";
+  position: absolute;
+  bottom: 28px;
+  right: 24px;
+  width: 70px;
+  height: 70px;
+  border: 8px solid #ffd60a;
+  border-radius: 50%;
+}
+.card.invertido .panel::before { left: auto; right: -40px; }
+.card.invertido .panel::after { right: auto; left: 24px; }
+
+.panel h2 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 38px;
+  transform: skewX(-8deg);
+  text-shadow: 3px 3px 0 #2b1055;
+}
+.panel h2::after {
+  content: "";
+  display: block;
+  height: 8px;
+  margin-top: 10px;
+  background: #ffd60a;
+  border-radius: 6px;
+}
+.panel p {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.btn-panel {
+  position: relative;
+  z-index: 1;
+  padding: 12px 34px;
+  background: #ffd60a;
+  color: #2b1055;
+  text-decoration: none;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 22px;
+  border: 3px solid #fff;
+  border-radius: 999px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-panel:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.9);
+}
+
+/* ----- Lado del formulario ----- */
+.form-side {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 70px 48px 50px;
+}
+
+/* Franja de colores abajo */
+.form-side::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 14px;
+  background: repeating-linear-gradient(
+    90deg,
+    #ffd60a 0, #ffd60a 24px,
+    #bde0fe 24px, #bde0fe 48px,
+    #ffafcc 48px, #ffafcc 72px
+  );
+}
+
+.logo {
+  position: absolute;
+  top: 20px;
+  left: 28px;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 22px;
+  color: #ef476f;
+  transform: skewX(-10deg);
+  text-shadow: 2px 2px 0 #ffd60a;
+}
+.card:not(.invertido) .logo { left: auto; right: 28px; }
+
+h1 {
+  margin: 0 0 26px;
+  text-align: center;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 42px;
+  color: #ef476f;
+  transform: skewX(-8deg);
+  text-shadow: 3px 3px 0 #ffd60a;
+}
+
+/* ----- Campos ----- */
+.campo { margin-bottom: 14px; }
+
+.campo input {
+  width: 100%;
+  padding: 15px 24px;
+  font-family: inherit;
+  font-size: 16px;
+  color: #2b1055;
+  background: #eef6ff;
+  border: 3px solid #bde0fe;
+  border-radius: 999px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.campo input::placeholder { color: #8aa4c4; }
+.campo input:focus {
+  background: #fff;
+  border-color: #ffd60a;
+  box-shadow: 0 0 0 4px rgba(255, 214, 10, 0.35);
+}
+.campo input.invalido { border-color: #ef476f; background: #fff1f4; }
+
+.error-campo {
+  display: block;
+  margin: 4px 0 0 22px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #d62857;
+}
+.error-campo:empty { display: none; }
+
+/* ----- Mensaje general ----- */
+.mensaje {
+  min-height: 22px;
+  margin: 4px 0 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 15px;
+}
+.mensaje.error { color: #d62857; }
+.mensaje.ok { color: #2a9d8f; }
+
+/* ----- Botón de enviar ----- */
+.btn-enviar {
+  display: block;
+  margin: 0 auto;
+  padding: 14px 44px;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 22px;
+  color: #2b1055;
+  background: #ffd60a;
+  border: 3px solid #2b1055;
+  border-radius: 16px;
+  box-shadow: 4px 4px 0 #2b1055;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.btn-enviar:hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 #2b1055;
+}
+.btn-enviar:active:not(:disabled) {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 #2b1055;
+}
+.btn-enviar:disabled { opacity: 0.7; cursor: wait; }
+
+.volver {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: #7a6aa8;
+  text-decoration: none;
+}
+.volver:hover { color: #ef476f; text-decoration: underline; }
+
+/* ----- Celulares y pantallas chicas ----- */
+@media (max-width: 760px) {
+  .card, .card.invertido { flex-direction: column; }
+
+  .panel,
+  .card.invertido .panel {
+    flex-basis: auto;
+    padding: 30px 20px;
+    border-radius: 0 0 70px 70px;
+  }
+  .panel h2 { font-size: 30px; }
+
+  .form-side { padding: 56px 24px 40px; }
+  .logo, .card:not(.invertido) .logo { left: 50%; right: auto; transform: translateX(-50%) skewX(-10deg); }
+  h1 { font-size: 34px; }
+}
